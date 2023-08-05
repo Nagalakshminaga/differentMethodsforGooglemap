@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+   <head>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&key=AIzaSyAzHJUEksxZQ0UI_ikmS3rMH1vmfT1xa9I&libraries=places"></script>
+    <div>
+    
+      <input id="address" type="text" placeholder="search here" />
+   </div>
+      <div>
+   
+           <p>Latitude:
+               <input type="text" id="latitude" readonly />
+           </p>
+           <p>Longitude
+               <input type="text" id="longitude" readonly />
+           </p>
+       </div>
+       <div id="googleMap" style="width:50%;height:300px;"></div>
+    <script>
+     
+      
+     google.maps.event.addDomListener(window, 'load', initialize);
+     function initialize() {
+      var mapProp= {
+      center: new google.maps.LatLng(40.525639,	-89.012779),
+      zoom:8,
+   
+  };
+  var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
+
+      
+       var input = document.getElementById('address');
+       var autocomplete = new google.maps.places.Autocomplete(input);
+       autocomplete.addListener('place_changed', function () {
+       var place = autocomplete.getPlace();
+// place variable will have all the information you are looking for.
+ 
+       document.getElementById("latitude").value = place.geometry['location'].lat();
+       document.getElementById("longitude").value = place.geometry['location'].lng();
+       
+      //var s1 = document.getElementById("latitude").value;
+     // var s2 = document.getElementById("longitude").value;
+      //var b1 = s1=>place.geometry['location'].lat();
+      //var b2 = s2=>place.geometry['location'].lng();
+
+});
+     }
+      
+
+    </script>
+   </head>
+
+  <body>
+
+  </body>
+  </html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Get latitude and longitude from address google map api javascript</title>
+    
+</head>
+<body>
+ 
+<div class="container">
+     
+ <div>
+    
+   <input id="address" type="text" placeholder="search here" />
+</div>
+   <div>
+
+        <p>Latitude:
+            <input type="text" id="latitude" readonly />
+        </p>
+        <p>Longitude
+            <input type="text" id="longitude" readonly />
+        </p>
+    </div>
+
+<div id="googleMap" style="width:30%;height:300px;"></div>
+
+
+</div>
+<!-- Add the this google map apis to webpage -->
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&key=AIzaSyAzHJUEksxZQ0UI_ikmS3rMH1vmfT1xa9I&libraries=places"></script>
+ 
+<script>
+    
+google.maps.event.addDomListener(window, 'load', initialize);
+function initialize() {
+    
+var input = document.getElementById('address');
+var autocomplete = new google.maps.places.Autocomplete(input);
+autocomplete.addListener('place_changed', function () {
+var place = autocomplete.getPlace();
+// place variable will have all the information you are looking for.
+ 
+  document.getElementById("latitude").value = place.geometry['location'].lat();
+  document.getElementById("longitude").value = place.geometry['location'].lng();
+
+
+});
+var mapProp= {
+    center: new google.maps.LatLng(52.525595,13.39308525),
+    zoom:8,
+   
+  };
+  var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
+
+     }
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>
